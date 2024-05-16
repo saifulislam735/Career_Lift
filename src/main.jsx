@@ -12,11 +12,11 @@ import Statistics from './Component/Statistics/Statistics';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/Career_Lift",
     element: <Root></Root>,
     children: [
       {
-        path: "/statistics",
+        path: "/Career_Lift/statistics",
         element: <Statistics></Statistics>,
       },
       {

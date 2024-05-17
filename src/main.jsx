@@ -9,15 +9,20 @@ import {
 import Root from './Component/Root/Root';
 import Error from './Component/404/Error';
 import Statistics from './Component/Statistics/Statistics';
+import Apply from './Component/Apply/Apply';
 
 const router = createBrowserRouter([
   {
-    path: "/Career_Lift",
+    path: "/Career_Lift/",
     element: <Root></Root>,
     children: [
       {
         path: "/Career_Lift/statistics",
         element: <Statistics></Statistics>,
+      },
+      {
+        path: "/Career_Lift/start_apply",
+        element: <Apply></Apply>,
       },
       {
         path: "*",

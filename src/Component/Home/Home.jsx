@@ -7,6 +7,8 @@ import Footer from '../Footer/Footer';
 
 const Home = ({ catagory }) => {
     const [jobs, setJobs] = useState([]);
+    const [showAll, setShowAll] = useState(false);
+
     useEffect(() => {
         const fetchJobs = async () => {
             try {
@@ -20,7 +22,17 @@ const Home = ({ catagory }) => {
 
         fetchJobs();
     }, []);
-    console.log(jobs)
+
+    const handleShowAll = () => {
+        setShowAll(true);
+    };
+    const handleCloseAll = () => {
+        setShowAll(false);
+    };
+    {
+        // const value = showAll ? jobs : jobs.slice(0, 4)
+        // console.log(value)
+    }
     return (
         <div>
             {/* Hero Section */}
@@ -53,13 +65,19 @@ const Home = ({ catagory }) => {
                         <p style={{ color: "var(--Dark-04, #A3A3A3)" }}>Explore thousands of job opportunities with all the information you need. Its your future</p>
                     </div>
                     <div className='grid grid-cols-2 mt-8 gap-6'>
-                        {
-                            jobs.map(jb => <FeatureJobs key={jb.id} job={jb}></FeatureJobs>)
-                        }
+                        {(showAll ? jobs : jobs.slice(0, 4)).map((item, index) =>
+                            <FeatureJobs key={index} job={item} ></FeatureJobs>
+                        )}
+
                     </div>
-                    <div className='text-center mt-10 mb-32'>
-                        <button className='px-7 py-5 text-xl text-white font-extrabold ' style={{ borderRadius: '4px', background: "linear-gradient(90deg, #7E90FE 0%, #9873FF 100%)" }}>See All Jobs</button>
+                    <div className='text-center py-16'>
+                        {!showAll ? (
+                            <button className='px-5 py-4  text-white font-extrabold transition duration-300 ease-in-out transform hover:scale-110 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 ' style={{ borderRadius: '4px', background: "linear-gradient(90deg, #7E90FE 0%, #9873FF 100%)" }} onClick={handleShowAll}>Show All</button>
+                        ) : (
+                            <button className='px-5 py-4  text-white font-extrabold transition duration-300 ease-in-out transform hover:scale-110 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50' style={{ borderRadius: '4px', background: "linear-gradient(90deg, #7E90FE 0%, #9873FF 100%)" }} onClick={handleCloseAll}>Close All</button>
+                        )}
                     </div>
+
                 </div>
             </section>
 

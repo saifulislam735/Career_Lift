@@ -1,12 +1,13 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLoaderData } from "react-router-dom";
 import Header from "../Header/Header";
 import Home from "../Home/Home";
 
 const Root = () => {
+    const catagory = useLoaderData();
     return (
-        <div className="px-60">
+        <div >
             <Header></Header>
-            <Home></Home>
+            <Home key={catagory.id} catagory={catagory}></Home>
             <Outlet></Outlet>
         </div>
     );

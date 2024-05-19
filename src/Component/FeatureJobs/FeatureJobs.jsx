@@ -1,4 +1,5 @@
 import { CurrencyDollarIcon, MapPinIcon } from '@heroicons/react/24/solid'
+import { Link } from 'react-router-dom';
 
 const FeatureJobs = ({ job }) => {
 
@@ -21,7 +22,7 @@ const FeatureJobs = ({ job }) => {
                     <p>Salary: {job.salary}</p>
                 </div>
             </p>
-            <button className='px-4 py-3  text-white font-extrabold transition duration-300 ease-in-out transform hover:scale-110 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50' style={{ borderRadius: '4px', background: "linear-gradient(90deg, #7E90FE 0%, #9873FF 100%)" }}>View Details</button>
+            <button className='px-4 py-3  text-white font-extrabold transition duration-300 ease-in-out transform hover:scale-110 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50' style={{ borderRadius: '4px', background: "linear-gradient(90deg, #7E90FE 0%, #9873FF 100%)" }}><Link to={`/Career_Lift/job_Details/${job.id}`}>View Details</Link></button>
         </div >
     );
 };

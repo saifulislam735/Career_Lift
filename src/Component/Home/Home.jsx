@@ -3,13 +3,33 @@ import JobCatagory from '../JobCatagory/JobCatagory';
 import FeatureJobs from '../FeatureJobs/FeatureJobs';
 import { useEffect, useState } from 'react';
 import Hero from '../Hero/Hero';
-import { useLoaderData } from 'react-router-dom';
+// import { useLoaderData } from 'react-router-dom';
 // import Footer from '../Footer/Footer';
 
 const Home = () => {
-    const catagory = useLoaderData();
+
+    // const catagory = useLoaderData();
+    //while using loader there was occuring a problem ''catagory.map is not a function'' , It happen when I come back from detils of jobs to home directly by header link
+    //so here I used manually data fetching using useState
+
+    const [catagory, setCatagory] = useState([]);
     const [jobs, setJobs] = useState([]);
     const [showAll, setShowAll] = useState(false);
+
+    console.log(typeof catagory, catagory)
+    useEffect(() => {
+        const fetchJobs = async () => {
+            try {
+                const response = await fetch('categories.json');
+                const data = await response.json();
+                setCatagory(data);
+            } catch (error) {
+                console.error('Error fetching the jobs:', error);
+            }
+        };
+
+        fetchJobs();
+    }, []);
 
     useEffect(() => {
         const fetchJobs = async () => {
@@ -44,13 +64,13 @@ const Home = () => {
             {/* Job Catagory Section */}
             <section className='mt-24 mb-16 bg-white' >
                 <div className='px-60'>
-                    <div className='text-center '>
+                    <div className='text-center'>
                         <h2 className='text-5xl font-extrabold mb-4'>Job Category List</h2>
                         <p style={{ color: "var(--Dark-04, #A3A3A3)" }}>Explore thousands of job opportunities with all the information you need. Its your future</p>
                     </div>
                     <div className='grid grid-cols-4 mt-8 gap-7'>
                         {
-                            catagory.map(ct => <JobCatagory key={ct.id} catagory={ct}></JobCatagory>)
+                            catagory.map((ct, index) => <JobCatagory key={index} catagory={ct}></JobCatagory>)
                         }
                     </div>
                 </div>

@@ -1,14 +1,20 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import backgroundImg from '../../assets/images/bg1.png'
 import { CurrencyDollarIcon, BriefcaseIcon, PhoneIcon, MapPinIcon, EnvelopeIcon } from '@heroicons/react/24/solid'
+import { addToDb } from "../../fakedb";
 
 
 const JobDetails = () => {
-    const { jobId } = useParams();
+    const { jobId } = useParams();//reaciving param from the dynamic path
     const ID = parseInt(jobId)
+
     const data = useLoaderData()
     const [jobinformation] = data.filter(jb => jb.id === ID)
-    console.log(jobinformation, 'details')
+    // console.log(jobinformation, 'details')
+
+    const handleApply = (id) => {
+        addToDb(id)
+    }
     return (
         <div>
             {/* upper section */}
@@ -39,11 +45,11 @@ const JobDetails = () => {
 
                             <div className='flex gap-1'>
                                 <CurrencyDollarIcon className="size-6 text-gray-500" />
-                                <p>Salary: {jobinformation.salary}</p>
+                                <p><span className="font-bold">Salary:</span>{jobinformation.salary}</p>
                             </div>
                             <div className='flex gap-1'>
                                 <BriefcaseIcon className="size-6 text-gray-500" />
-                                <p>Job Title: {jobinformation.job_title}</p>
+                                <p><span className="font-bold">Job Title:</span>{jobinformation.job_title}</p>
                             </div>
                         </div>
                         <div className="flex flex-col gap-2">
@@ -51,20 +57,20 @@ const JobDetails = () => {
                             <hr className="border-0 h-0.5 bg-gradient-to-r from-indigo-400 to-purple-500 opacity-10" />
                             <div className='flex gap-1'>
                                 <PhoneIcon className="size-6 text-gray-500" />
-                                <p>Phone: {jobinformation.salary}</p>
+                                <p><span className="font-bold">Phone:</span>{jobinformation.salary}</p>
                             </div>
                             <div className='flex gap-1'>
                                 <EnvelopeIcon className="size-6 text-gray-500" />
-                                <p>Email: {jobinformation.job_title}</p>
+                                <p><span className="font-bold">Email:</span>{jobinformation.job_title}</p>
                             </div>
                             <div className='flex gap-1'>
                                 <MapPinIcon className="size-6 text-gray-500" />
-                                <p>Address: {jobinformation.job_title}</p>
+                                <p><span className="font-bold">Address:</span>{jobinformation.job_title}</p>
                             </div>
                         </div>
                     </div>
 
-                    <button className='px-4 py-3   text-white font-extrabold transition duration-300 ease-in-out transform hover:scale-110 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50' style={{ borderRadius: '4px', background: "linear-gradient(90deg, #7E90FE 0%, #9873FF 100%)" }}>Apply Now</button>
+                    <button onClick={() => handleApply(ID)} className='px-4 py-3   text-white font-extrabold transition duration-200 ease-in-out transform hover:scale-110 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50' style={{ borderRadius: '4px', background: "linear-gradient(90deg, #7E90FE 0%, #9873FF 100%)" }}>Apply Now</button>
                 </div>
             </div>
 

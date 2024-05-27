@@ -12,6 +12,7 @@ import Statistics from './Component/Statistics/Statistics';
 import Apply from './Component/Apply/Apply';
 import JobDetails from './Component/JobDetails/JobDetails';
 import Home from './Component/Home/Home';
+import Blog from './Component/Blog/Blog';
 // import handleViewDetails from './handleViewDetails';
 
 
@@ -31,12 +32,15 @@ const router = createBrowserRouter([
       {
         path: "/Career_Lift/appliedjobs",
         element: <Apply></Apply>,
-        // loader: () => fetch('jobs.json'),
       },
       {
         path: "/Career_Lift/job_Details/:jobId",
         element: <JobDetails ></JobDetails>,
         loader: () => fetch('jobs.json')
+      },
+      {
+        path: "/Career_Lift/blog",
+        element: <Blog></Blog>,
       },
       {
         path: "*",

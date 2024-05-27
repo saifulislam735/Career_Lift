@@ -26,7 +26,6 @@ const JobDetails = () => {
             toast.success('Application Succesful')
 
         }
-
     }
 
 

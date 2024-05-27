@@ -1,7 +1,7 @@
 
 const Statistics = () => {
     return (
-        <div>
+        <div className="px-60">
             <p>This is Statistics page</p>
         </div>
     );

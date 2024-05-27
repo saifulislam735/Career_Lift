@@ -5,7 +5,7 @@ import "@fontsource/inter"; // Defaults to weight 400
 const Header = () => {
     return (
         <div style={{ background: "linear-gradient(90deg, rgba(126, 144, 254, 0.05) 0%, rgba(152, 115, 255, 0.05) 100%)" }} className="grid grid-cols-3  py-10 items-center px-60">
-            <Link to={'/Career_Lift/'} className="text-3xl font-extrabold col-span-1">CarrerLift</Link>
+            <Link to={'/Career_Lift/home'} className="text-3xl font-extrabold col-span-1">CarrerLift</Link>
             <div style={{ color: "var(--Dark-03, #757575)" }} className="col-span-1 flex gap-5 font-semibold">
                 <ActiveLink to={'/Career_Lift/home'}>Home</ActiveLink>
                 <ActiveLink to={'/Career_Lift/statistics'}>Statistics</ActiveLink>

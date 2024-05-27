@@ -2,6 +2,7 @@ import FeatureJobs from "../FeatureJobs/FeatureJobs";
 
 const AppliedJob = ({ appliedJobs }) => {
 
+
     if (!appliedJobs) {
         return null; // or return some fallback UI
     }

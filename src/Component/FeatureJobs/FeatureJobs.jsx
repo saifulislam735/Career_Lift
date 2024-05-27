@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 const FeatureJobs = ({ job, appliedStyle }) => {
     return (
+
         <div
             style={{
                 borderRadius: "8px",

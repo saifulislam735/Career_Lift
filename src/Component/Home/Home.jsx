@@ -16,7 +16,8 @@ const Home = () => {
     const [jobs, setJobs] = useState([]);
     const [showAll, setShowAll] = useState(false);
 
-    console.log(typeof catagory, catagory)
+    // console.log(typeof catagory, catagory)
+    
     useEffect(() => {
         const fetchJobs = async () => {
             try {

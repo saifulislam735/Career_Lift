@@ -1,7 +1,8 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import backgroundImg from '../../assets/images/bg1.png'
 import { CurrencyDollarIcon, BriefcaseIcon, PhoneIcon, MapPinIcon, EnvelopeIcon } from '@heroicons/react/24/solid'
-import { addToDb } from "../../fakedb";
+import { addToDb, getShoppingCart } from "../../fakedb";
+import toast from "react-hot-toast";
 
 
 const JobDetails = () => {
@@ -12,9 +13,23 @@ const JobDetails = () => {
     const [jobinformation] = data.filter(jb => jb.id === ID)
     // console.log(jobinformation, 'details')
 
+
     const handleApply = (id) => {
         addToDb(id)
+        
+        const dataFromDb = getShoppingCart()
+        //double application warning
+        if (dataFromDb[jobId] > 1) {
+            toast.error('Already Applied')
+        }
+        else {
+            toast.success('Application Succesful')
+
+        }
+
     }
+
+
     return (
         <div>
             {/* upper section */}
@@ -71,6 +86,9 @@ const JobDetails = () => {
                     </div>
 
                     <button onClick={() => handleApply(ID)} className='px-4 py-3   text-white font-extrabold transition duration-200 ease-in-out transform hover:scale-110 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50' style={{ borderRadius: '4px', background: "linear-gradient(90deg, #7E90FE 0%, #9873FF 100%)" }}>Apply Now</button>
+
+
+
                 </div>
             </div>
 

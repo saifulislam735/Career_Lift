@@ -3,12 +3,12 @@ import { getShoppingCart } from '../../fakedb';
 import AppliedJob from '../AppliedJobs/AppliedJob';
 import './Apply.css'
 import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/solid'
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Apply = () => {
 
     const [jobs, setJobs] = useState([]);
-    useLayoutEffect(() => {
+    useEffect(() => {
         const fetchJobs = async () => {
             try {
                 const response = await fetch('jobs.json');
@@ -18,25 +18,37 @@ const Apply = () => {
                 console.error('Error fetching the jobs:', error);
             }
         };
-
         fetchJobs();
     }, []);
 
-    const appliedJobId = getShoppingCart()
-    // console.log(appliedJobId)
+    const [appliedJob, setAppliedJob] = useState([]);
+    const [showAppliedJob, setShowAppliedJob] = useState([]);
 
-    const appliedJob = [];
-    // console.log(jobs)
+    useEffect(() => {
+        const appliedJobId = getShoppingCart();
+        const appliedJobs = [];
 
-    {
         for (const id in appliedJobId) {
-            const Id = parseInt(id)
-            const applied = jobs.find(d => d.id === Id)
-            // console.log(applied)
-            appliedJob.push(applied);
+            const Id = parseInt(id);
+            const applied = jobs.find(d => d.id === Id);
+            if (applied) {
+                appliedJobs.push(applied);
+            }
         }
+
+        setAppliedJob(appliedJobs);
+        setShowAppliedJob(appliedJobs);
+    }, [jobs]);
+
+    const handleOnsiteJob = () => {
+        const fliteredJob = appliedJob.filter(jb => jb.remote_or_onsite === "Onsite")
+        setShowAppliedJob(fliteredJob)
     }
-    // console.log(appliedJob)
+    const handleRemoteJob = () => {
+        const fliteredJob = appliedJob.filter(jb => jb.remote_or_onsite === "Remote")
+        setShowAppliedJob(fliteredJob)
+    }
+
 
     return (
         <div>
@@ -51,14 +63,15 @@ const Apply = () => {
                         <span>Filter By</span>
                         <AdjustmentsHorizontalIcon className="size-6 text-gray-500" />
                     </button>
-                    <div className="dropdown-content">
-                        <p>Remote</p>
-                        <p>Onsite</p>
+                    <div className="dropdown-content text-center">
+                        <p onClick={() => handleRemoteJob()} className='hover:bg-slate-300 p-2 rounded'>Remote</p>
+                        <p onClick={() => handleOnsiteJob()} className='hover:bg-slate-300 p-2 rounded'>Onsite</p>
                     </div>
                 </div>
                 <div className='mt-4'>
                     {
-                        appliedJob.map((d, id) => <AppliedJob key={id} appliedJobs={d}></AppliedJob>)
+                        showAppliedJob.map((d, id) => <AppliedJob key={id} appliedJobs={d}
+                        ></AppliedJob>)
                     }
                 </div>
             </div>
